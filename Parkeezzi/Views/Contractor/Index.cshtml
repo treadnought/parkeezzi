@@ -4,38 +4,23 @@
     ViewData["Title"] = "Contractor Details";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <script type="text/javascript"
-            src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
-    </script>
-</head>
-<body>
-    <div class="container">
-        <div class="row">
-            <h2>Invoices</h2>
-        </div>
-        <div class="row">
-            <ul class="collapsible" data-collapsible="accordion">
-                @foreach (var invoice in Model.ContractorInvoices)
-                {
-                    <li>
-                        <div class="collapsible-header">
-                            <i class="material-icons">content_copy</i>
-                            @invoice.InvoiceRef
-                        </div>
-                        <div class="collapsible-body"><span>This is a list of invoice items</span></div>
-                    </li>
-                }
-            </ul>
-        </div>
+<div class="container">
+    <div class="row">
+        <h2>Invoices</h2>
     </div>
-</body>
-</html>
+    <div class="row">
+        <ul class="collapsible" data-collapsible="accordion">
+            @foreach (var invoice in Model.ContractorInvoices)
+            {
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">content_copy</i>
+                        @invoice.InvoiceRef
+                    </div>
+                    <div class="collapsible-body"><span>This is a list of invoice items</span></div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
 
