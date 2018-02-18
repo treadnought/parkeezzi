@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Parkeezzi.Services;
 using Parkeezzi.ViewModels;
 
 namespace Parkeezzi.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ContractorService _contractorService;
+
+        public HomeController(ContractorService contractorService)
+        {
+            _contractorService = contractorService;
+        }
         public IActionResult Index()
         {
-            var model = new ContractorList();
-            var contractor = new ContractorList.Contractor { Company = "Gold Budgets Pty Ltd" };
-            model.Contractors.Add(contractor);
+            ContractorList model = _contractorService.ListContractors();
             return View(model);
         }
     }
