@@ -10,52 +10,70 @@ using System.Threading.Tasks;
 
 namespace Parkeezzi.Services
 {
-   public class ContractorService
-   {
-      private readonly ParkeezziContext _context;
+    public class ContractorService
+    {
+        private readonly ParkeezziContext _context;
 
-      public ContractorService(ParkeezziContext context)
-      {
-         _context = context;
-      }
+        public ContractorService(ParkeezziContext context)
+        {
+            this._context = context;
+        }
 
-      public ContractorList ListContractors()
-      {
-         var model = new ContractorList();
+        public ContractorList ListContractors()
+        {
+            var model = new ContractorList();
 
-         foreach (var contractor in _context.Contractors)
-         {
-            model.Contractors.Add(new ContractorList.Contractor { Company = contractor.Company });
-         }
-         //var contractor = new ContractorList.Contractor { Company = "Gold Budgets Pty Ltd" };
-         //model.Contractors.Add(contractor);
-         return model;
-      }
+            foreach (var contractor in _context.Contractors)
+            {
+                model.Contractors.Add(new ContractorList.Contractor { Id = contractor.Id, Company = contractor.Company });
+            }
+            //var contractor = new ContractorList.Contractor { Company = "Gold Budgets Pty Ltd" };
+            //model.Contractors.Add(contractor);
+            return model;
+        }
 
-      public ContractorView GetContractor(int id)
-      {
-         var model = new ContractorView();
+        public ContractorView GetContractor(int id)
+        {
+            var model = new ContractorView();
 
-         var contractor = _context.Contractors
-            .Include(c => c.ContractorInvoices)
-            .FirstOrDefault(c => c.Id == id);
+            var contractor = _context.Contractors
+               .Include(c => c.ContractorInvoices)
+               .ThenInclude(i => i.ContractorInvoiceItems)
+               .FirstOrDefault(c => c.Id == id);
 
-         foreach (var invoice in contractor.ContractorInvoices)
-         {
-            var modelInvoice = new ContractorView.ContractorInvoice();
-            modelInvoice.ContractorInvoiceRef = invoice.InvRef;
-            model.ContractorInvoices.Add(modelInvoice);
-         }
+            model.Company = contractor.Company;
 
-         //var invoice = new ContractorView.ContractorInvoice { InvoiceRef = "GB001" };
-         //var invoice1 = new ContractorView.ContractorInvoice { InvoiceRef = "GB002" };
-         //var invoice2 = new ContractorView.ContractorInvoice { InvoiceRef = "GB003" };
-         //var invoice3 = new ContractorView.ContractorInvoice { InvoiceRef = "GB004" };
-         //model.ContractorInvoices.Add(invoice);
-         //model.ContractorInvoices.Add(invoice1);
-         //model.ContractorInvoices.Add(invoice2);
-         //model.ContractorInvoices.Add(invoice3);
-         return model;
-      }
-   }
+            foreach (var invoice in contractor.ContractorInvoices)
+            {
+                var modelInvoice = new ContractorView.ContractorInvoice
+                {
+                    ContractorInvoiceRef = invoice.InvRef
+                };
+
+                foreach (var item in invoice.ContractorInvoiceItems)
+                {
+                    var modelItem = new ContractorView.ContractorInvoiceItem
+                    {
+                        Item = item.Item,
+                        Amount = item.Amount,
+                        GST = item.GST,
+                        Onbill = item.Onbill,
+                        ItemNote = item.ItemNote
+                    };
+                    modelInvoice.ContractorInvoiceItems.Add(modelItem);
+                }
+                model.ContractorInvoices.Add(modelInvoice);
+            }
+
+            //var invoice = new ContractorView.ContractorInvoice { InvoiceRef = "GB001" };
+            //var invoice1 = new ContractorView.ContractorInvoice { InvoiceRef = "GB002" };
+            //var invoice2 = new ContractorView.ContractorInvoice { InvoiceRef = "GB003" };
+            //var invoice3 = new ContractorView.ContractorInvoice { InvoiceRef = "GB004" };
+            //model.ContractorInvoices.Add(invoice);
+            //model.ContractorInvoices.Add(invoice1);
+            //model.ContractorInvoices.Add(invoice2);
+            //model.ContractorInvoices.Add(invoice3);
+            return model;
+        }
+    }
 }

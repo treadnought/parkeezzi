@@ -10,9 +10,9 @@ namespace Parkeezzi.Models
     {
         public int Id { get; set; }
         public string InvRef { get; set; }
-        public int ContractorId { get; set; }
-        public Contractor Contractor { get; set; }
         public List<ContractorInvoiceItem> ContractorInvoiceItems { get; set; } 
             = new List<ContractorInvoiceItem>();
+        public int ContractorId { get; set; }
+        public Contractor Contractor { get; set; }
     }
 }

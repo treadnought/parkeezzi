@@ -1,0 +1,21 @@
+        <ul class="collapsible" data-collapsible="accordion">
+            @foreach (var invoice in Model.ContractorInvoices)
+            {
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">content_copy</i>
+                        @invoice.ContractorInvoiceRef
+                        @foreach (var item in invoice.ContractorInvoiceItems)
+                        {
+                            <div class="collapsible-body">
+                                @item.Item
+                                @item.Amount
+                                @item.GST
+                                @item.Onbill
+                                @item.ItemNote
+                            </div>
+                        }
+                    </div>
+                </li>
+            }
+        </ul>

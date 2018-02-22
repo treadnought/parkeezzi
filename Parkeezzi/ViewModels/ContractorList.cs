@@ -11,6 +11,7 @@ namespace Parkeezzi.ViewModels
         public List<Contractor> Contractors { get; set; } = new List<Contractor>();
         public class Contractor
         {
+            public int Id { get; set; }
             public string Company { get; set; }
         }
     }

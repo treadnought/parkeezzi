@@ -11,12 +11,13 @@ namespace Parkeezzi.DataAccess
     public class ParkeezziContext : DbContext
     {
         public ParkeezziContext(DbContextOptions<ParkeezziContext> options)
-            :base(options)
+            : base(options)
         {
             
         }
 
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<ContractorInvoice> ContractorInvoices { get; set; }
+        public DbSet<ContractorInvoiceItem> ContractorInvoiceItems { get; set; }
     }
 }

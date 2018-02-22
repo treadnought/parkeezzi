@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <h2>Invoices</h2>
+        <h4>@Model.Company Invoices</h4>
     </div>
     <div class="row">
         <ul class="collapsible" data-collapsible="accordion">
@@ -17,10 +17,35 @@
                         <i class="material-icons">content_copy</i>
                         @invoice.ContractorInvoiceRef
                     </div>
-                    <div class="collapsible-body"><span>This is a list of invoice items</span></div>
+                    <div class="collapsible-body">
+                        <table class="bordered highlight">
+                            <tr>
+                                <th>Item</th>
+                                <th>Amount</th>
+                                <th>GST</th>
+                                <th>Onbill</th>
+                                <th>Note</th>
+                            </tr>
+                            @foreach (var item in invoice.ContractorInvoiceItems)
+                            {
+                                <tr>
+                                    <td>@item.Item</td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.GST</td>
+                                    <td>@item.Onbill</td>
+                                    <td>@item.ItemNote</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
                 </li>
             }
         </ul>
+        <div class="row">
+            <a asp-controller="Home" asp-action="Index" class="waves-effect waves-light btn">
+                <i class="material-icons">chevron_left</i>
+            </a>
+        </div>
     </div>
 </div>
 
