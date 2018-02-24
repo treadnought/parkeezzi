@@ -1,0 +1,16 @@
+﻿@model Parkeezzi.ViewModels.NewContractorInvoice
+@{
+    ViewData["Title"] = "Add Contractor Invoice";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Add Contractor Invoice</h2>
+        <form asp-controller="Contractor" asp-action="AddContractorInvoice">
+            <label asp-for="InvRef">Contractor Invoice Reference</label>
+            <input asp-for="InvRef" type="text" />
+            <input type="submit" class="btn" />
+        </form>
+    </div>
+</div>
+

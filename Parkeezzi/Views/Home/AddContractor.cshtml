@@ -1,0 +1,14 @@
+﻿@model Parkeezzi.ViewModels.NewContractor
+@{
+    ViewData["Title"] = "New Contractor";
+}
+
+<div class="container">
+    <h2>Add a New Contractor</h2>
+    <form method="post" asp-controller="Home" asp-action="AddContractor">
+        <label>Company</label>
+        <input asp-for="Company" type="text" />
+        <input type="submit" class="btn" />
+    </form>
+</div>
+

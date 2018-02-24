@@ -8,13 +8,14 @@ namespace Parkeezzi.ViewModels
 {
     public class ContractorView
     {
+        public int Id { get; set; }
         public string Company { get; set; }
 
         public List<ContractorInvoice> ContractorInvoices { get; set; } = new List<ContractorInvoice>();
 
         public class ContractorInvoice
         {
-            public string ContractorInvoiceRef { get; set; }
+            public string InvRef { get; set; }
             public List<ContractorInvoiceItem> ContractorInvoiceItems { get; set; } = new List<ContractorInvoiceItem>();
         }
 

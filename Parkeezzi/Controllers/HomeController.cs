@@ -21,5 +21,22 @@ namespace Parkeezzi.Controllers
             ContractorList model = _contractorService.ListContractors();
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AddContractor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddContractor(NewContractor vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _contractorService.AddContractor(vm);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(vm);
+        }
     }
 }

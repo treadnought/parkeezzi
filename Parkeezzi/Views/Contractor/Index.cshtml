@@ -6,16 +6,22 @@
 
 <div class="container">
     <div class="row">
-        <h4>@Model.Company Invoices</h4>
+        <h4>@Model.Company: Invoices</h4>
     </div>
+    <a asp-controller="Contractor"
+       asp-action="AddContractorInvoice"
+       asp-route-id="@Model.Id"
+       class="waves-effect waves-light btn">
+        Add Invoice
+    </a>
     <div class="row">
         <ul class="collapsible" data-collapsible="accordion">
             @foreach (var invoice in Model.ContractorInvoices)
             {
                 <li>
                     <div class="collapsible-header">
-                        <i class="material-icons">content_copy</i>
-                        @invoice.ContractorInvoiceRef
+                        <i class="material-icons">note</i>
+                        @invoice.InvRef
                     </div>
                     <div class="collapsible-body">
                         <table class="bordered highlight">

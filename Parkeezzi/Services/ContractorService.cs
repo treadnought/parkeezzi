@@ -32,6 +32,15 @@ namespace Parkeezzi.Services
             return model;
         }
 
+        public void AddContractorInvoice(NewContractorInvoice vm)
+        {
+            var contractor = _context.Contractors
+                .SingleOrDefault(x => x.Id == vm.Id);
+
+            contractor.ContractorInvoices.Add(new ContractorInvoice { InvRef = vm.InvRef });
+            _context.SaveChanges();
+        }
+
         public ContractorView GetContractor(int id)
         {
             var model = new ContractorView();
@@ -41,13 +50,14 @@ namespace Parkeezzi.Services
                .ThenInclude(i => i.ContractorInvoiceItems)
                .FirstOrDefault(c => c.Id == id);
 
+            model.Id = contractor.Id;
             model.Company = contractor.Company;
 
             foreach (var invoice in contractor.ContractorInvoices)
             {
                 var modelInvoice = new ContractorView.ContractorInvoice
                 {
-                    ContractorInvoiceRef = invoice.InvRef
+                    InvRef = invoice.InvRef
                 };
 
                 foreach (var item in invoice.ContractorInvoiceItems)
@@ -74,6 +84,13 @@ namespace Parkeezzi.Services
             //model.ContractorInvoices.Add(invoice2);
             //model.ContractorInvoices.Add(invoice3);
             return model;
+        }
+
+        public void AddContractor(NewContractor vm)
+        {
+            var newContractor = new Contractor { Company = vm.Company };
+            _context.Add(newContractor);
+            _context.SaveChanges();
         }
     }
 }

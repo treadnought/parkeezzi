@@ -21,5 +21,22 @@ namespace Parkeezzi.Controllers
             ContractorView model = _contractorService.GetContractor(id);
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AddContractorInvoice(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddContractorInvoice(NewContractorInvoice vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _contractorService.AddContractorInvoice(vm);
+                return RedirectToAction(nameof(Index), new { id = vm.Id });
+            }
+            return View(vm);
+        }
     }
 }
