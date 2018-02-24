@@ -5,19 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parkeezzi.Models
+namespace Parkeezzi.ViewModels
 {
-    public class ContractorInvoiceItem
+    public class NewContractorInvoiceItem
     {
-        public int Id { get; set; }
         [Required]
         public string Item { get; set; }
         [Required]
         public double Amount { get; set; }
-        public bool GST { get; set; } = true;
-        public bool Onbill { get; set; } = true;
+        public bool GST { get; set; }
+        public bool Onbill { get; set; }
         public string ItemNote { get; set; }
-        public int ContractorInvoiceId { get; set; }
-        public ContractorInvoice ContractorInvoice { get; set; }
     }
 }
