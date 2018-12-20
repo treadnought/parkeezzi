@@ -13,7 +13,7 @@ namespace Parkeezzi.DataAccess
         public ParkeezziContext(DbContextOptions<ParkeezziContext> options)
             : base(options)
         {
-            
+            Database.Migrate();
         }
 
         public DbSet<Contractor> Contractors { get; set; }

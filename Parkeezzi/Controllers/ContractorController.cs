@@ -38,5 +38,22 @@ namespace Parkeezzi.Controllers
             }
             return View(vm);
         }
+
+        [HttpGet]
+        public IActionResult AddContractorInvoiceItem(int Id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddContractorInvoiceItem(int invoiceId, NewContractorInvoiceItem vm)
+        {
+            if (ModelState.IsValid)
+            {
+                _contractorService.AddContractorInvoiceItem(vm);
+                return RedirectToAction(nameof(Index), new { id = vm.InvoiceId });
+            }
+            return View(vm);
+        }
     }
 }

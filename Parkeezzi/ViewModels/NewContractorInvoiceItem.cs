@@ -9,7 +9,7 @@ namespace Parkeezzi.ViewModels
 {
     public class NewContractorInvoiceItem
     {
-        [Required]
+        public int InvoiceId { get; set; }
         public string Item { get; set; }
         [Required]
         public double Amount { get; set; }

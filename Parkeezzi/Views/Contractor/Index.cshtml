@@ -43,6 +43,12 @@
                                 </tr>
                             }
                         </table>
+                        <a asp-controller="Contractor" 
+                           asp-action="AddContractorInvoiceItem" 
+                           asp-route-id="@invoice.Id"
+                           class="waves-effect waves-light btn">
+                            Add Invoice Item
+                        </a>
                     </div>
                 </li>
             }

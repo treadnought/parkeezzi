@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Parkeezzi.Services
 {
-    public class ContractorService
+    public class ContractorService : IContractorService
     {
         private readonly ParkeezziContext _context;
 
@@ -32,15 +32,6 @@ namespace Parkeezzi.Services
             return model;
         }
 
-        public void AddContractorInvoice(NewContractorInvoice vm)
-        {
-            var contractor = _context.Contractors
-                .SingleOrDefault(x => x.Id == vm.Id);
-
-            contractor.ContractorInvoices.Add(new ContractorInvoice { InvRef = vm.InvRef });
-            _context.SaveChanges();
-        }
-
         public ContractorView GetContractor(int id)
         {
             var model = new ContractorView();
@@ -59,6 +50,7 @@ namespace Parkeezzi.Services
                 {
                     InvRef = invoice.InvRef
                 };
+                modelInvoice.Id = invoice.Id;
 
                 foreach (var item in invoice.ContractorInvoiceItems)
                 {
@@ -90,6 +82,39 @@ namespace Parkeezzi.Services
         {
             var newContractor = new Contractor { Company = vm.Company };
             _context.Add(newContractor);
+            _context.SaveChanges();
+        }
+
+        public void AddContractorInvoice(NewContractorInvoice vm)
+        {
+            var contractor = _context.Contractors
+                .SingleOrDefault(x => x.Id == vm.Id);
+
+            contractor.ContractorInvoices.Add(new ContractorInvoice { InvRef = vm.InvRef });
+            _context.SaveChanges();
+        }
+
+        public void AddContractorInvoiceItem(NewContractorInvoiceItem vm)
+        {
+            var contractor = _context.Contractors
+                .Include(c => c.ContractorInvoices)
+                .ThenInclude(i => i.ContractorInvoiceItems)
+                .SingleOrDefault(x => x.Id == vm.InvoiceId);
+
+            //var invoice = contractor.ContractorInvoices
+            //    .Where(i => i.Id == vm.InvoiceId)
+            //    .SingleOrDefault();
+
+            var newItem = new ContractorInvoiceItem
+            {
+                //ContractorInvoiceId = contractor.ContractorInvoices.Id;
+                Item = vm.Item,
+                Amount = vm.Amount,
+                GST = vm.GST,
+                Onbill = vm.Onbill,
+                ItemNote = vm.ItemNote
+            };
+            //invoice.ContractorInvoiceItems.Add(newItem);
             _context.SaveChanges();
         }
     }

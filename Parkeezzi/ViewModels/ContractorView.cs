@@ -15,6 +15,7 @@ namespace Parkeezzi.ViewModels
 
         public class ContractorInvoice
         {
+            public int Id { get; set; }
             public string InvRef { get; set; }
             public List<ContractorInvoiceItem> ContractorInvoiceItems { get; set; } = new List<ContractorInvoiceItem>();
         }

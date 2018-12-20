@@ -15,7 +15,7 @@ namespace Parkeezzi.Models
         [Required]
         public double Amount { get; set; }
         public bool GST { get; set; } = true;
-        public bool Onbill { get; set; } = true;
+        public bool Onbill { get; set; } = false;
         public string ItemNote { get; set; }
         public int ContractorInvoiceId { get; set; }
         public ContractorInvoice ContractorInvoice { get; set; }

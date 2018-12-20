@@ -7,6 +7,10 @@
 *.userosscache
 *.sln.docstates
 
+SQLQuery1.sql
+SQLQuery2.sql
+HTMLPage1.html
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

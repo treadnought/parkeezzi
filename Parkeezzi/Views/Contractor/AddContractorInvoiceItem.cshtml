@@ -1,0 +1,38 @@
+﻿@model Parkeezzi.ViewModels.NewContractorInvoiceItem
+@{
+    ViewData["Title"] = "Add Invoice Item";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Add Invoice Item</h2>
+        <form method="post" asp-controller="Contractor" asp-action="AddContractorInvoiceItem">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="input-field col s12">
+                <input asp-for="Item" placeholder="Item name" id="itemName" type="text" class="validate" />
+                <label asp-for="Item">Item name</label>
+            </div>
+            <div class="input-field col s12">
+                <input asp-for="Amount" placeholder="Amount" id="amount" type="text" class="validate" />
+                <label asp-for="Amount">Amount</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="checkbox" asp-for="GST" />
+                <label asp-for="GST">GST</label>
+            </div>
+            <div class="input-field col s12">
+                <input type="checkbox" asp-for="Onbill" />
+                <label asp-for="Onbill">Onbill</label>
+            </div>
+            <div class="input-field col s12">
+                <textarea asp-for="ItemNote" id="itemNote" class="materialize-textarea"></textarea>
+                <label asp-for="ItemNote">Note</label>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">
+                Submit
+                <i class="material-icons right">send</i>
+            </button>
+        </form>
+    </div>
+</div>
+
